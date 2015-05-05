@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module('main', ['ngTable', 'ngResource', 'ui.bootstrap', 'ng-sortable']);
+    var app = angular.module('main', ['ngTable', 'ngResource', 'ui.bootstrap', 'ng-sortable', 'ngDragDrop']);
 
     //data table
     app.controller('TableController', function ($scope, $filter, $resource, ngTableParams) {
@@ -60,6 +60,48 @@
             ];
 
         }]);
+    app.controller('oneCtrl', function($scope, $timeout) {
+    	  $scope.list1 = [];
+    	  $scope.list2 = [
+    	    { 'title': 'a', 'drag': true },
+    	    { 'title': 'b', 'drag': true },
+    	    { 'title': 'c', 'drag': true },
+    	    { 'title': 'd', 'drag': true },
+    	    { 'title': 'e', 'drag': true },
+    	    { 'title': 'f', 'drag': true },
+    	    { 'title': 'g', 'drag': true },
+    	    { 'title': 'h', 'drag': true },
+    	    { 'title': 'i', 'drag': true }
+    	  ];
+    	  angular.forEach($scope.list2, function(val, key) {
+    		  $scope.list1.push($scope.list2);
+    	  });
+
+    	  $scope.startCallback = function(event, ui, title) {
+    	    console.log('You started draggin: ' + title.title);
+    	    $scope.draggedTitle = title.title;
+    	  };
+
+    	  $scope.stopCallback = function(event, ui) {
+    	    console.log('Why did you stop draggin me?');
+    	  };
+
+    	  $scope.dragCallback = function(event, ui) {
+    	    console.log('hey, look I`m flying');
+    	  };
+
+    	  $scope.dropCallback = function(event, ui) {
+    	    console.log('hey, you dumped me :-(' , $scope.draggedTitle);
+    	  };
+
+    	  $scope.overCallback = function(event, ui) {
+    	    console.log('Look, I`m over you');
+    	  };
+
+    	  $scope.outCallback = function(event, ui) {
+    	    console.log('I`m not, hehe');
+    	  };
+	});
 
     //onStart actions
     app.run(function ($rootScope) {

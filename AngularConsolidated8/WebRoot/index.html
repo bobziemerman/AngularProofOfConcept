@@ -7,6 +7,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
         <script src="JsLibraries/angular-ui.js"></script>
+        <script src="JSLibraries/jquery-ui.min.js"></script>
+        <script src="JSLibraries/angular-dragdrop.min.js"></script>
 
         <!-- sortable files -->
         <script src="https://rubaxa.github.io/Sortable/Sortable.js"></script>
@@ -24,9 +26,10 @@
         <!-- CSS -->
         <link data-require="bootstrap-css@*" data-semver="3.0.0" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
         <link data-require="ng-table@*" data-semver="0.3.0" rel="stylesheet" href="JsLibraries/ngTable/ng-table.css" />
+        <link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <div id='appWrapper'>
+        <div id='appWrapper' class="container form-inline">
             <div id='loggedIn'>
                 <tabset> <tab heading="Table" active="true">
                         <div ng-controller="TableController as table">
@@ -55,7 +58,8 @@
                                 <strong>Page:</strong> {{tableParams.page()}}
                             </p>
                         </div>
-                    </tab> <tab heading="Drag & Drop">
+                    </tab>
+                    <tab heading="Drag & Drop">
                         <div ng-controller='dragNdrop'>
                             <ul ng-sortable="{animation:150}" class='list-group'>
                                 <li ng-repeat="item in items" class='list-group-item'
@@ -64,9 +68,25 @@
                             </ul>
                         </div>
                     </tab>
+                    <tab heading="Josh's Drag & Drop">
+                    	<style>
+					      .thumbnail { height: 280px !important; }
+					      .btn-droppable { width: 200px; height: 200px; }
+					      .btn-draggable { width: 160px; height: 160px;}
+					      .emage { height: 215px; }
+					    </style>
+                    	<div ng-controller="oneCtrl">
+					      <div class="navbar-inner">
+					        <div class="container form-inline" style="text-align: center;width:650px;">
+					          <div class="btn btn-droppable" ng-repeat="item in list2" data-drop="true" ng-model='list2' jqyoui-droppable="{index: {{$index}}}">
+					            <div class="btn btn-info btn-draggable center-block" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2" jqyoui-draggable="{index: {{$index}},placeholder:true,animate:true, onStart:'startCallback(item, $index)', onStop: 'stopCallback', onDrag: 'dragCallback'}" ng-hide="!item.title">{{item.title}}</div>
+					          </div>
+					        </div>
+					      </div>
+					    </div>
+                    </tab>
                 </tabset>
             </div>
-            
             <div id="logout">
             	<a href="/AngularConsolidated8/logout">
             		<button type="button" class="btn">Logout</button>
