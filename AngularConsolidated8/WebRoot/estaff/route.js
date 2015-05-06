@@ -1,0 +1,10 @@
+angular.module('main')
+    .config(function($routeProvider){$routeProvider
+            .when('/initialTesting',{
+                templateUrl:'/estaff/initialTesting/initialTesting.html'
+            })
+            .when('/',{
+                templateUrl:'/estaff/initialTesting/initialTesting.html'
+            })
+            .otherwise({redirectTo:'/'});
+    });

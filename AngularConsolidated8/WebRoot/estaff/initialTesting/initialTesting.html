@@ -1,0 +1,56 @@
+<tabset> 
+    <tab heading="Table" active="true">
+        <div ng-controller="TableController as table">
+            <table ng-table="tableParams" class="table">
+                <tr ng-repeat="user in $data">
+                    <td data-title="'A'" sortable="A">
+                        <span ng-if="!user.$edit">{{user.A}}</span>
+                        <div ng-if="user.$edit">
+                            <input class="form-control" type="text" ng-model="user.A" />
+                        </div></td>
+                    <td data-title="'B'" sortable="B">
+                        <span ng-if="!user.$edit">{{user.B}}</span>
+                        <div ng-if="user.$edit">
+                            <input class="form-control" type="text" ng-model="user.B" />
+                        </div></td>
+                    <td data-title="'Edit'" width="50">
+                        <a ng-if="!user.$edit"
+                           href="" class="btn btn-default btn-xs"
+                           ng-click="user.$edit = true">Edit</a> <a ng-if="user.$edit"
+                           href="" class="btn btn-primary btn-xs"
+                           ng-click="user.$edit = false">Save</a></td>
+                </tr>
+            </table>
+
+            <p>
+                <strong>Page:</strong> {{tableParams.page()}}
+            </p>
+        </div>
+    </tab>
+    <tab heading="Drag & Drop">
+        <div ng-controller='dragNdrop'>
+            <ul ng-sortable="{animation:150}" class='list-group'>
+                <li ng-repeat="item in items" class='list-group-item'
+                    style="float:left; width:33%;" title={{item.title}}>
+                    {{item.name}}</li>
+            </ul>
+        </div>
+    </tab>
+    <tab heading="Josh's Drag & Drop">
+        <style>
+                              .thumbnail { height: 280px !important; }
+                              .btn-droppable { width: 200px; height: 200px; }
+                              .btn-draggable { width: 160px; height: 160px;}
+                              .emage { height: 215px; }
+                            </style>
+        <div ng-controller="oneCtrl">
+                              <div class="navbar-inner">
+                                <div class="container form-inline" style="text-align: center;width:650px;">
+                                  <div class="btn btn-droppable" ng-repeat="item in list2" data-drop="true" ng-model='list2' jqyoui-droppable="{index: {{$index}}}">
+                                    <div class="btn btn-info btn-draggable center-block" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2" jqyoui-draggable="{index: {{$index}},placeholder:true,animate:true, onStart:'startCallback(item, $index)', onStop: 'stopCallback', onDrag: 'dragCallback'}" ng-hide="!item.title">{{item.title}}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+    </tab>
+</tabset>
